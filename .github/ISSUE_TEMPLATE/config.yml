@@ -4,5 +4,5 @@ contact_links:
     url: https://grani.arseni.work
     about: How each component behaves, with its API and a live example.
   - name: A security problem
-    url: https://github.com/arsdmitriev/grani/security/policy
+    url: https://github.com/arsdmitriev/grani-ui/security/policy
     about: Report it privately, never in a public issue.

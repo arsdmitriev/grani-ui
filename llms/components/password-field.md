@@ -2,7 +2,7 @@
 
 > Set a new password by typing or generating one, check it on screen and copy it; a screen reader confirms the generation without reading the password.
 
-A component of grani-ui 0.1.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/password-field
+A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/password-field
 
 Also called password input, password generator.
 

@@ -2,7 +2,7 @@
 
 > Introduce a page or section with a title, a short explanation and the actions available there.
 
-A component of grani-ui 0.1.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/header
+A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/header
 
 Also called page header, section header, title bar.
 

@@ -2,7 +2,7 @@
 
 > Count things with minus and plus, such as pieces in a cart or guests on a booking, or type the number when it is far from the current one.
 
-A component of grani-ui 0.1.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/stepper
+A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/stepper
 
 Also called quantity input, counter, plus minus input, numeric stepper.
 

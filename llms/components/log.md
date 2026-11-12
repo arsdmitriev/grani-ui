@@ -2,7 +2,7 @@
 
 > Follow a record's history: who changed what and when, with complete old and new values shown together.
 
-A component of grani-ui 0.1.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/log
+A component of grani-ui 0.2.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/log
 
 Also called timeline, activity log, history, audit log.
 

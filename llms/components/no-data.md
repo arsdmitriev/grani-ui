@@ -2,7 +2,7 @@
 
 > Understand why an area is empty and what you can do next.
 
-A component of grani-ui 0.1.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/no-data
+A component of grani-ui 0.2.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/no-data
 
 Also called empty state, no results, placeholder message.
 

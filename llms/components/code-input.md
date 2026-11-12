@@ -2,7 +2,7 @@
 
 > Enter a one-time code by typing, pasting or, where the browser supports it, autofill from a message, and let the app know when the code is complete.
 
-A component of grani-ui 0.1.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/code-input
+A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/code-input
 
 Also called otp input, one-time code input, pin input, verification code.
 

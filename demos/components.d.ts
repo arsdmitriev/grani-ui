@@ -50,6 +50,7 @@ declare module 'vue' {
     UiPasswordField: (typeof import('../index'))['UiPasswordField']
     UiPopover: (typeof import('../index'))['UiPopover']
     UiProgress: (typeof import('../index'))['UiProgress']
+    UiQuiz: (typeof import('../index'))['UiQuiz']
     UiRadio: (typeof import('../index'))['UiRadio']
     UiRadioGroup: (typeof import('../index'))['UiRadioGroup']
     UiReveal: (typeof import('../index'))['UiReveal']

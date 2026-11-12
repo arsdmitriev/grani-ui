@@ -2,7 +2,7 @@
 
 > See how much a value changed as a signed percentage, and whether the change is for the better.
 
-A component of grani-ui 0.1.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/delta
+A component of grani-ui 0.2.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/delta
 
 Also called trend indicator, change indicator, percent change.
 

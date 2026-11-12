@@ -2,7 +2,7 @@
 
 > Keep search, filters and actions together above the table they affect.
 
-A component of grani-ui 0.1.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/table-toolbar
+A component of grani-ui 0.2.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/table-toolbar
 
 Also called list toolbar, search and filters bar, table header bar.
 

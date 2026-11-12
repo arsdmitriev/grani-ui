@@ -2,7 +2,7 @@
 
 > Arrange related content vertically or horizontally with consistent spacing between groups, headings and sections.
 
-A component of grani-ui 0.1.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/stack
+A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/stack
 
 Also called vertical stack, vstack, spacing scale.
 

@@ -2,7 +2,7 @@
 
 > Add a short status or tag beside an item, such as “Draft” or “Paid”.
 
-A component of grani-ui 0.1.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/badge
+A component of grani-ui 0.2.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/badge
 
 Also called chip, tag, pill, status label.
 

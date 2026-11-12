@@ -112,6 +112,40 @@ export type RadioGroupVariant = 'plain' | 'card' | 'card-check' | 'segmented'
 
 export type TabValue = string | number
 
+/** An answer a question of UiQuiz offers. */
+export interface QuizOption {
+  /** What the answers carry when it is chosen. */
+  value: string
+  /** The answer as the person reads it. */
+  label: string
+  /** A line under the label: what the answer means or costs. */
+  description?: string
+}
+
+/** A question of UiQuiz. */
+export interface QuizQuestion {
+  /** The key its answer stands under in the answers; one per question. */
+  name: string
+  /** The question itself. */
+  title: string
+  /** A line under the question. */
+  description?: string
+  /** The answers offered, in their order: the first nine answer to a key. */
+  options: QuizOption[]
+  /** Several answers may be chosen: the answer is a list. */
+  multiple?: boolean
+  /** An answer is needed: the quiz does not go on without one, and offers no Skip. */
+  required?: boolean
+  /** A field for an answer of one's own, after the answers offered. A string names the field in place of "Another answer". */
+  other?: boolean | string
+}
+
+/** What UiQuiz holds, by the name of the question: an answer or `null`, a list for a question with `multiple`. An answer of one's own is the text as typed, trimmed. */
+export type QuizAnswers = Record<string, string | string[] | null>
+
+/** The keys the answers of UiQuiz answer to: the digits, the letters from A, or none. */
+export type QuizKeys = 'numbers' | 'letters' | 'none'
+
 export interface TabItem {
   value: TabValue
   label: string

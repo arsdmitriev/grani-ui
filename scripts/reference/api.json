@@ -5081,6 +5081,137 @@
         "notFor": "- A wait in place: UiSpinner.\n- Content on its way: UiSkeleton.\n- A number: UiCount.\n- A change: UiDelta.\n- A mark to give: UiScaleInput."
       }
     },
+    "UiQuiz": {
+      "props": [
+        {
+          "name": "questions",
+          "type": "QuizQuestion[]",
+          "required": true,
+          "doc": "The questions, in the order they are asked."
+        },
+        {
+          "name": "modelValue",
+          "type": "QuizAnswers",
+          "required": true,
+          "doc": "The answers by question name (`v-model`): an answer or `null`, a list for a question with `multiple`."
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "doc": "The question shown, from 0 (`v-model:step`). Unset, the quiz keeps it itself and starts at the first."
+        },
+        {
+          "name": "keys",
+          "type": "QuizKeys",
+          "values": [
+            "none",
+            "numbers",
+            "letters"
+          ],
+          "default": "\"numbers\"",
+          "doc": "The keys the answers answer to: the digits, the letters from A, or none, which also hides the caps."
+        },
+        {
+          "name": "action",
+          "type": "((answers: QuizAnswers) => unknown)",
+          "doc": "Sends the answers from the last question. The quiz waits for it; a rejection keeps the question and raises a toast."
+        },
+        {
+          "name": "sendLabel",
+          "type": "string",
+          "default": "\"\"",
+          "doc": "The last question's button, the act itself: \"Save plan\" beats \"Send\"."
+        },
+        {
+          "name": "variant",
+          "type": "\"outline\" | \"plain\"",
+          "values": [
+            "outline",
+            "plain"
+          ],
+          "default": "\"outline\"",
+          "doc": "`outline` is a card of its own, its top edge the progress; `plain` draws no card and no edge, for a window or a drawer that already frames it."
+        }
+      ],
+      "events": [
+        {
+          "name": "submit",
+          "payload": "answers: QuizAnswers",
+          "doc": "The answers were sent: after `action` settled, or at once without one."
+        },
+        {
+          "name": "update:modelValue",
+          "payload": "answers: QuizAnswers",
+          "doc": "An answer changed: all the answers, by question name."
+        },
+        {
+          "name": "update:step",
+          "payload": "step: number",
+          "doc": "Another question is shown: its index from 0."
+        }
+      ],
+      "slots": [
+        {
+          "name": "done",
+          "scope": "Record<string, never>",
+          "doc": "What stands in place of the questions after a send: a thank-you, what happens next."
+        }
+      ],
+      "attrs": "Attributes are placed by the component itself: its description says where.",
+      "doc": {
+        "lead": "A few questions asked one at a time, each answered by a tile, a key or a line of one's own. Take it for a short survey, an onboarding or a brief: three to ten questions of choices.",
+        "decisions": [
+          {
+            "label": "Questions",
+            "text": "A question is data: `name`, `title`, its `options`, and what it allows (`multiple`, `required`, `other`). The answers stand in the model under the question's name: an answer or `null`, a list for a question with `multiple`."
+          },
+          {
+            "label": "Tiles",
+            "text": "The whole tile is the target: a press anywhere on it, its description and its key cap included, answers. The chosen tile wears a bar of the brand at its start edge over a muted band, and no radio or check is drawn: the line under the question says whether one answer or several are taken. A chosen answer of a question with one answer is not taken back by a second press: Skip clears it."
+          },
+          {
+            "label": "Keys",
+            "text": "`keys` gives the first nine answers a key, the digits or the letters from A, shown on a cap before the answer; `none` shows no cap and hears no key. A key chooses and never turns the page: Enter does. The keys are heard while the focus is inside the quiz, and stay silent in the field of one's own answer, under Ctrl, Alt or Cmd, and while an input method composes a word. A letter is read by its key, not its character, so A answers on any layout."
+          },
+          {
+            "label": "Own answer",
+            "text": "`other` adds a field after the tiles. Its text, trimmed, is the answer as soon as it is typed; in a list it stands beside the tiles chosen. A tile chosen after that leaves the text in the field, no longer the answer; the focus back in the field makes it the answer again. An answer that matches no option is read as one's own, so a saved answer comes back into the field: only in a question with `other`, and only the first such value of a list. Any other value no option has (an option the app has removed since) is no answer: nothing is chosen, a `required` question still asks, and the quiz leaves the value as it is. Names are one per question and values one per answer; in development the console names a repeat."
+          },
+          {
+            "label": "Moving",
+            "text": "Next is never turned off: on a `required` question with no answer it says so under the question, puts the focus on the first answer and stays. Skip stands only on a question that is not required, and clears its answer. Back checks nothing and clears nothing. After each move the focus stands in the new question, on its chosen answer or its first. An answer changed on an earlier question leaves the later ones as they are."
+          },
+          {
+            "label": "Resume",
+            "text": "The answers and the question shown are the app's, `v-model` and `v-model:step`: an app that saved both opens the quiz where it was left. A step past the last question shows the last; an answer under a name no question has is neither shown nor touched. A step the app sets moves no focus: the app turned the page, and the focus is where it put it. With no questions the quiz draws nothing."
+          },
+          {
+            "label": "Sending",
+            "text": "The last question's button sends, and a send answers for the whole quiz: an earlier `required` question left empty, which an app may have stepped over, is opened with its error and nothing is sent; Skip on the last question is checked the same way. `action` gets the answers and is waited for, the button busy and the tiles still, and a second press or a held Enter sends nothing. An action that fails keeps the last question and its answers and says so in a toast, so the app needs a UiToaster. After a send the quiz shows `#done` in its place, when the slot is given, and `submit` tells the app; with no `#done` the last question stays and may be sent again. `restart()` brings the first question back: the step, the drafts, the error and the sent state go, the answers stay the app's. Called during a send, it drops that send: its answer, late, shows nothing, raises no toast and tells the app nothing."
+          },
+          {
+            "label": "Attributes",
+            "text": "The quiz is a form of many controls, none of them the quiz: the caller's attributes and listeners stand on the form."
+          },
+          {
+            "label": "Progress",
+            "text": "\"Question 2 of 5\" stands over the question, and the card's top edge fills with the brand, a segment per question; past twelve questions the edge is one line. The edge says how far, the words say where. After a send with `#done` the card has its plain top border again."
+          },
+          {
+            "label": "Variants",
+            "text": "`outline` is a card of its own. `plain` draws no card and no edge and keeps the words: for a window or a drawer, which frame it already."
+          },
+          {
+            "label": "Placement",
+            "text": "On a page of its own or in a column of one, up to 560px wide; `plain` in the body of a window or a drawer."
+          }
+        ],
+        "keyboard": "- `1-9` `A-I`: choose the answer with that cap, and take it back in a question of several; the key after the last tile's puts the caret in the field of one's own answer.\n- `Enter`: goes to the next question, or sends on the last. Held down, it is one press.\n- `ArrowUp` `ArrowDown`: move the choice in a question of one answer, as native radios do.\n- `Space`: checks and unchecks an answer in a question of several.\n- `Tab`: one stop on a question of one answer, a stop per answer in a question of several, then the field, then the buttons.",
+        "reader": "- Question: a radiogroup, or a group for several answers, named by the question; its description, the line \"Choose one\" or \"Choose any that apply\" and the error are read with it.\n- Answers: native radios or checkboxes named by their labels, the description read after; the key caps are not read.\n- Progress: \"Question 2 of 3\" is text over the question and is read with it; the edge of the card is drawn for the eye and hidden from a reader.\n- Error: announced when it appears (`role=\"alert\"`) and read with the question. A radiogroup is also `aria-required` and `aria-invalid`; a group of several takes neither, so its error says it.\n- Sending: the form is `aria-busy` and the button says busy under its spinner.",
+        "states": "A question of one answer, of several, with a field of one's own, required with no answer after Next, the last question, sending, sent with `#done`, `keys` as `numbers`, `letters` and `none`, and the variants `outline` and `plain`.",
+        "notFor": "- A question before what cannot be undone: UiConfirm.\n- One setting among a form's fields: UiRadioGroup.\n- A form of fields to type in: UiField in a UiCard.\n- A mark from 1 to N: UiScaleInput."
+      }
+    },
     "UiRadio": {
       "props": [
         {

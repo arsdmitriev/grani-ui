@@ -2,7 +2,7 @@
 
 > Show where content will appear while it loads, holding its space so the page around it moves less.
 
-A component of grani-ui 0.1.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/skeleton
+A component of grani-ui 0.2.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/skeleton
 
 Also called loading placeholder, shimmer, content placeholder.
 

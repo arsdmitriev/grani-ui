@@ -50,6 +50,7 @@ const NAMES = new Set([
   'UiPasswordField',
   'UiPopover',
   'UiProgress',
+  'UiQuiz',
   'UiRadio',
   'UiRadioGroup',
   'UiReveal',

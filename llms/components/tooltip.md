@@ -2,7 +2,7 @@
 
 > Get a short hint on hover, keyboard focus or tap; anything essential stays on the page outside the tooltip.
 
-A component of grani-ui 0.1.0. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/tooltip
+A component of grani-ui 0.2.0. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/tooltip
 
 Also called hint, hover hint.
 

@@ -42,6 +42,10 @@ type LogEvent
 type MoneyTone
 type NavGroup
 type NavItem
+type QuizAnswers
+type QuizKeys
+type QuizOption
+type QuizQuestion
 RANGE_PRESETS
 type RadioGroupVariant
 type RangePreset
@@ -114,6 +118,7 @@ UiPasswordField
 type UiPluralKey
 UiPopover
 UiProgress
+UiQuiz
 UiRadio
 UiRadioGroup
 UiReveal

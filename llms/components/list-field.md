@@ -2,7 +2,7 @@
 
 > Search a list and add entries from one field. Paste a column to add several entries, and recover your text if adding fails.
 
-A component of grani-ui 0.1.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/list-field
+A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/list-field
 
 Also called tag input, token input, chips input, multi-value field.
 

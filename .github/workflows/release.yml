@@ -29,7 +29,6 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - run: npm run gates
       - run: npm pack
-      - name: Publish, a prerelease under beta
-        run: npm publish ./grani-ui-*.tgz --provenance --access public ${{ contains(github.ref_name, '-') && '--tag beta' || '' }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm install -g npm@11.17.0 --ignore-scripts --no-audit --no-fund
+      - name: Stage for the owner's approval, a prerelease under beta
+        run: npm stage publish ./grani-ui-*.tgz --provenance --access public ${{ contains(github.ref_name, '-') && '--tag beta' || '' }}

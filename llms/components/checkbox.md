@@ -2,7 +2,7 @@
 
 > Choose yes or no by clicking the box or its label; the tick shows the value the app accepted.
 
-A component of grani-ui 0.1.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/checkbox
+A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/checkbox
 
 Also called check box, tick box.
 

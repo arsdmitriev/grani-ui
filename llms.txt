@@ -3,11 +3,11 @@
 > Screens built with grani behave alike: the focus comes back where it was, a late answer never replaces a newer search, typed text that failed to add comes back to its field.
 > The interaction patterns below say how, most of them proved by a test.
 
-Version 0.1.0. Interaction patterns for admin apps, and the Vue 3 components that keep them: focus, late answers, loading, errors. Most proved by a test. Tailwind CSS 4, typed, SSR-ready.
+Version 0.2.0. Interaction patterns for admin apps, and the Vue 3 components that keep them: focus, late answers, loading, errors. Most proved by a test. Tailwind CSS 4, typed, SSR-ready.
 
 ## How to use this reference
 
-1. Check the installed grani-ui version (`npm ls grani-ui`); this text is 0.1.0.
+1. Check the installed grani-ui version (`npm ls grani-ui`); this text is 0.2.0.
 2. Choose components from the catalog, or start from the task below.
 3. Read a component's page before writing code: its whole example, its API and what it leaves to the app.
 4. Use only the documented props, events and slots.
@@ -113,6 +113,7 @@ A page per component: its whole example, its API, what it leaves to the app and 
 - [UiPagination](node_modules/grani-ui/llms/components/pagination.md): Pagination (also pager, page navigation). Move between pages with Previous, Next and page numbers below a list or table.
 - [UiPopover](node_modules/grani-ui/llms/components/popover.md): Popover (also dropdown panel, flyout, popup). Open a small panel of options beside a button while keeping the rest of the page available.
 - [UiProgress](node_modules/grani-ui/llms/components/progress.md): Progress (also progress bar, loading bar). See how much of a task or target is complete when its progress can be measured.
+- [UiQuiz](node_modules/grani-ui/llms/components/quiz.md): Quiz (also questionnaire, survey, multi-step questions, onboarding questions). Ask a few questions one at a time, such as a short survey or the setup of a new workspace, and answer each by a tile, a key or a line of your own.
 - [UiRadioGroup](node_modules/grani-ui/llms/components/radio-group.md): Radio group (also radio buttons, segmented control, option cards). Choose one answer from a short list, cards or a segmented bar; the whole row or card is the click target. Parts on this page: UiRadio.
 - [UiReveal](node_modules/grani-ui/llms/components/reveal.md): Reveal (also accordion, collapsible, disclosure, expandable section). Open details where you need them and collapse them again without leaving the page.
 - [UiScaleInput](node_modules/grani-ui/llms/components/scale-input.md): Scale input (also rating, nps scale, likert scale, score input). Give a rating on a short labeled scale and, where clearing is allowed, take it back by choosing the same value again.

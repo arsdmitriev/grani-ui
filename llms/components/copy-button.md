@@ -2,7 +2,7 @@
 
 > Copy a value in one press and see whether it reached the clipboard.
 
-A component of grani-ui 0.1.0. Actions, stable, since 0.1.0. Page: https://grani.arseni.work/components/copy-button
+A component of grani-ui 0.2.0. Actions, stable, since 0.1.0. Page: https://grani.arseni.work/components/copy-button
 
 Also called copy to clipboard, clipboard button.
 

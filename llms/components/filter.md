@@ -2,7 +2,7 @@
 
 > Open filter choices from a toolbar button and narrow a list by one or more groups of options.
 
-A component of grani-ui 0.1.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/filter
+A component of grani-ui 0.2.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/filter
 
 Also called filter dropdown, faceted filter, filter button.
 

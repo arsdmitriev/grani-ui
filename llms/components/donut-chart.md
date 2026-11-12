@@ -2,7 +2,7 @@
 
 > Compare the parts of a total in a ring chart, with the total in the center and each part available from the keyboard.
 
-A component of grani-ui 0.1.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/donut-chart
+A component of grani-ui 0.2.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/donut-chart
 
 Also called pie chart, ring chart, share chart.
 

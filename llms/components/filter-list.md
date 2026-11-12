@@ -2,7 +2,7 @@
 
 > Narrow results by ticking options that apply at once; a search field appears when there are six or more.
 
-A component of grani-ui 0.1.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/filter-list
+A component of grani-ui 0.2.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/filter-list
 
 Also called checkbox list, multi-select list, option list.
 

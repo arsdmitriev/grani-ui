@@ -2,7 +2,7 @@
 
 > Keep related controls together, such as a main action and its menu or a field and its submit button.
 
-A component of grani-ui 0.1.0. Actions, stable, since 0.1.0. Page: https://grani.arseni.work/components/button-group
+A component of grani-ui 0.2.0. Actions, stable, since 0.1.0. Page: https://grani.arseni.work/components/button-group
 
 Also called segmented buttons, joined buttons, split button.
 

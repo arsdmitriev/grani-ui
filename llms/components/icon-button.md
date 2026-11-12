@@ -2,7 +2,7 @@
 
 > Offer a compact action, such as Search or Close, with an icon and an accessible name for screen readers.
 
-A component of grani-ui 0.1.0. Actions, stable, since 0.1.0. Page: https://grani.arseni.work/components/icon-button
+A component of grani-ui 0.2.0. Actions, stable, since 0.1.0. Page: https://grani.arseni.work/components/icon-button
 
 Also called icon-only button, glyph button.
 

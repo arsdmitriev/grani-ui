@@ -2,7 +2,7 @@
 
 > Present related rows in a card, separated by lines so each item is easy to distinguish.
 
-A component of grani-ui 0.1.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/list
+A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/list
 
 Also called list group, stack of rows.
 

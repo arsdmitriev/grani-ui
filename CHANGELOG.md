@@ -2,6 +2,22 @@
 
 Before 1.0 a minor version may include a breaking change; its section then says how to move.
 
+## 0.2.0 — 2026-11-12
+
+UiQuiz presents one question at a time, with answer tiles, keyboard shortcuts, and a custom answer
+field.
+
+- Added UiQuiz: define questions as data, with single or multiple selection and optional custom
+  answers.
+- Added UiQuiz keys: choose answers with number or letter keys, press Enter to continue, and skip
+  optional questions.
+- Added UiQuiz sending: the quiz awaits submission, prevents duplicate requests while sending, and
+  keeps the answers if submission fails.
+- Added UiQuiz progress: a segmented top edge and a question counter track progress;
+  `variant="plain"` removes the card frame when the quiz stands in a window.
+- Fixed Panels: a list, a menu or a popover opened while its control is still sliding in with a
+  drawer is shown when the control arrives; it stayed hidden, though open.
+
 ## 0.1.0 — 2026-10-27
 
 The first version brings 95 interaction patterns for admin apps, each with a live example, and the

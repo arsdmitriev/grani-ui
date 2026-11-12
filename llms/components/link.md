@@ -2,7 +2,7 @@
 
 > Follow an underlined link in text, marked when it opens a new tab.
 
-A component of grani-ui 0.1.0. Actions, stable, since 0.1.0. Page: https://grani.arseni.work/components/link
+A component of grani-ui 0.2.0. Actions, stable, since 0.1.0. Page: https://grani.arseni.work/components/link
 
 Also called hyperlink, anchor, text link.
 

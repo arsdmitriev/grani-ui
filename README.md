@@ -16,8 +16,8 @@ typed and tree-shaken, render on a server and hydrate in the browser, in English
 Showcase and live demo: https://grani.arseni.work
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arsdmitriev/grani/main/.github/readme/home-dark.png">
-  <img src="https://raw.githubusercontent.com/arsdmitriev/grani/main/.github/readme/home-light.png" alt="The grani showcase: the title, a Browse button and a table of invoices drawn with grani" width="1280">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/arsdmitriev/grani-ui/main/.github/readme/home-dark.png">
+  <img src="https://raw.githubusercontent.com/arsdmitriev/grani-ui/main/.github/readme/home-light.png" alt="The grani showcase: the title, a Browse button and a table of invoices drawn with grani" width="1280">
 </picture>
 
 An app needs:
@@ -30,21 +30,21 @@ An app needs:
 
 ## What's inside
 
-Every component below is stable: it passed the checks and a review by eye of its behavior, its
-example and its code. A component added later may start as experimental, marked on its card in the
-showcase and on its page in `llms/`: its API or behavior may still change in a 0.x minor, and the
-CHANGELOG says how to move.
+A stable component passed the checks and a review by eye of its behavior, its example and its
+code. An experimental one passed the checks and waits for that review; it is marked on its card in
+the showcase and on its page in `llms/`: its API or behavior may still change in a 0.x minor, and
+the CHANGELOG says how to move.
 
-| Family   | Components                                                                                                                                                 |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Data     | UiAvatar, UiDataTable, UiFilter, UiFilterList, UiLog, UiPagination, UiTable, UiTableColumns, UiTableToolbar                                                |
-| Charts   | UiAreaChart, UiBarChart, UiChartCard, UiDelta, UiDonutChart, UiSparkline                                                                                   |
-| Form     | UiCheckbox, UiCodeInput, UiDropzone, UiField, UiInput, UiListField, UiPasswordField, UiRadioGroup, UiScaleInput, UiSelect, UiStepper, UiSwitch, UiTextarea |
-| Dates    | UiCalendar, UiDatePicker, UiDateRange, UiTimePicker                                                                                                        |
-| Actions  | UiButton, UiButtonGroup, UiCopyButton, UiIconButton, UiLink                                                                                                |
-| Overlays | UiConfirm, UiCrudDrawer, UiDrawer, UiMenu, UiModal, UiPopover, UiToaster, UiTooltip                                                                        |
-| Layout   | UiAppShell, UiAspectRatio, UiCard, UiHeader, UiList, UiListItem, UiReveal, UiSeparator, UiStack, UiTabs, UiTruncate                                        |
-| Status   | UiBadge, UiCount, UiIndicator, UiNoData, UiProgress, UiSkeleton, UiSpinner                                                                                 |
+| Family   | Stable                                                                                                                                                     | Experimental |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| Data     | UiAvatar, UiDataTable, UiFilter, UiFilterList, UiLog, UiPagination, UiTable, UiTableColumns, UiTableToolbar                                                |              |
+| Charts   | UiAreaChart, UiBarChart, UiChartCard, UiDelta, UiDonutChart, UiSparkline                                                                                   |              |
+| Form     | UiCheckbox, UiCodeInput, UiDropzone, UiField, UiInput, UiListField, UiPasswordField, UiRadioGroup, UiScaleInput, UiSelect, UiStepper, UiSwitch, UiTextarea | UiQuiz       |
+| Dates    | UiCalendar, UiDatePicker, UiDateRange, UiTimePicker                                                                                                        |              |
+| Actions  | UiButton, UiButtonGroup, UiCopyButton, UiIconButton, UiLink                                                                                                |              |
+| Overlays | UiConfirm, UiCrudDrawer, UiDrawer, UiMenu, UiModal, UiPopover, UiToaster, UiTooltip                                                                        |              |
+| Layout   | UiAppShell, UiAspectRatio, UiCard, UiHeader, UiList, UiListItem, UiReveal, UiSeparator, UiStack, UiTabs, UiTruncate                                        |              |
+| Status   | UiBadge, UiCount, UiIndicator, UiNoData, UiProgress, UiSkeleton, UiSpinner                                                                                 |              |
 
 Three parts come with their whole and are imported beside it: UiDateCell and UiMoneyCell, the
 cells of UiTable, and UiRadio, an option of UiRadioGroup.
@@ -263,7 +263,7 @@ with a test.
 - Published versions stay on npm. If I stop, you keep everything: the sources, the tests, the texts
   for agents, under MIT.
 
-By Arseni Dmitriev, https://arseni.work. Source: https://github.com/arsdmitriev/grani.
+By Arseni Dmitriev, https://arseni.work. Source: https://github.com/arsdmitriev/grani-ui.
 
 ## Develop
 
@@ -285,4 +285,4 @@ live examples are at https://grani.arseni.work.
 ## License
 
 MIT. The Golos Text font in `assets/fonts` is under the SIL Open Font License, `assets/fonts/OFL.txt`.
-Security reports: see https://github.com/arsdmitriev/grani/blob/main/.github/SECURITY.md.
+Security reports: see https://github.com/arsdmitriev/grani-ui/blob/main/.github/SECURITY.md.

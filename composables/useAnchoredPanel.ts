@@ -45,6 +45,9 @@ export interface AnchoredPanelOptions {
   opener?: () => HTMLElement | null | undefined
 }
 
+/** How long a trigger out of the window is waited for: past the longest motion, `scene` at 400 ms. */
+const ARRIVAL_MS = 500
+
 export function useAnchoredPanel(o: AnchoredPanelOptions) {
   const overlays = useOverlayStack()
   const rect = ref<AnchorResult | null>(null)
@@ -55,6 +58,8 @@ export function useAnchoredPanel(o: AnchoredPanelOptions) {
 
   // The control that held the focus when the panel hid, for when it stands again.
   let parked: HTMLElement | null = null
+  // Until when a trigger out of the window is looked at again frame by frame; 0 while it is in.
+  let lookUntil = 0
   // A frame or two may pass before the panel is shown to the browser (a transition on everything,
   // as reduced motion leaves one, starts at hidden): tried again each frame, a few times, while the
   // focus is still on the page.
@@ -81,8 +86,16 @@ export function useAnchoredPanel(o: AnchoredPanelOptions) {
       const at = document.activeElement
       if (at instanceof HTMLElement && o.panel.value?.contains(at)) parked = at
       panelStyle.value = { visibility: 'hidden' }
+      // The trigger may be riding in on a surface that slides (a drawer on its way in keeps its
+      // fields past the edge for a frame or two): that move sends no scroll and no resize, and the
+      // panel would wait hidden for good. Looked at again each frame for as long as a motion lasts
+      // (the longest is 400 ms); a trigger still out after that was scrolled out, and a scroll
+      // brings it back.
+      lookUntil ||= performance.now() + ARRIVAL_MS
+      if (performance.now() < lookUntil) requestAnimationFrame(() => void reposition())
       return
     }
+    lookUntil = 0
     const back = parked
     parked = null
     const measured = o.panel.value
@@ -163,6 +176,7 @@ export function useAnchoredPanel(o: AnchoredPanelOptions) {
         }
         rect.value = null
         parked = null
+        lookUntil = 0
         panelStyle.value = { visibility: 'hidden' }
       }
     },

@@ -570,6 +570,14 @@ export const REGISTRY: Record<string, RegistryEntry> = {
     parent: 'UiRadioGroup',
     logic: ['checkMark', 'attrs', 'radioGroup', 'cardShell', 'composition'],
   },
+  UiQuiz: {
+    level: 'component',
+    status: 'experimental',
+    family: 'form',
+    since: '0.2.0',
+    aka: ['questionnaire', 'survey', 'multi-step questions', 'onboarding questions'],
+    logic: ['useToast', 'useUiT', 'focusInvalid', 'cardShell'],
+  },
   UiRadioGroup: {
     level: 'component',
     status: 'stable',

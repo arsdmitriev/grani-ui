@@ -2,7 +2,7 @@
 
 > Show one row with a title and description and an action or value beside it.
 
-A component of grani-ui 0.1.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/list-item
+A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/list-item
 
 Also called list row, setting row, cell.
 

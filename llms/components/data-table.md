@@ -2,7 +2,7 @@
 
 > Find and work with records in one place: search and filters above a table with selection and pages, and clear loading and error states.
 
-A component of grani-ui 0.1.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/data-table
+A component of grani-ui 0.2.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/data-table
 
 Also called data grid, list page, crud table, admin table.
 

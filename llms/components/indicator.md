@@ -2,7 +2,7 @@
 
 > Mark an item that needs attention with a count or dot in its corner.
 
-A component of grani-ui 0.1.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/indicator
+A component of grani-ui 0.2.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/indicator
 
 Also called notification dot, status dot, badge dot.
 

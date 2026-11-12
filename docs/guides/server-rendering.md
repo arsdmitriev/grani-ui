@@ -41,4 +41,4 @@ createSSRApp(App)
 ```
 
 A page served under a Content Security Policy needs one allowance for the `style` attributes a
-server render writes: [SECURITY.md](https://github.com/arsdmitriev/grani/blob/main/.github/SECURITY.md#content-security-policy).
+server render writes: [SECURITY.md](https://github.com/arsdmitriev/grani-ui/blob/main/.github/SECURITY.md#content-security-policy).

@@ -2,7 +2,7 @@
 
 > Follow values over time as lines and filled areas. Explore each point from the keyboard, with gaps shown as missing data rather than zero.
 
-A component of grani-ui 0.1.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/area-chart
+A component of grani-ui 0.2.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/area-chart
 
 Also called line chart, time series chart, trend chart.
 

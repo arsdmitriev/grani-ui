@@ -2,7 +2,7 @@
 
 > Reserve space for a photo or video before it loads, so nearby content stays in place.
 
-A component of grani-ui 0.1.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/aspect-ratio
+A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/aspect-ratio
 
 Also called media box, image placeholder.
 

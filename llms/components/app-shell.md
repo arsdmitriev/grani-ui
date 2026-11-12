@@ -2,7 +2,7 @@
 
 > Organize an app around a sidebar for navigation and a main area for the page you are working on.
 
-A component of grani-ui 0.1.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/app-shell
+A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/app-shell
 
 Also called app layout, sidebar layout, navigation shell.
 

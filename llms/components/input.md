@@ -2,7 +2,7 @@
 
 > Enter a single line of text, a password or a number in the app’s local format, such as 1 234,50 or 1,234.50.
 
-A component of grani-ui 0.1.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/input
+A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/input
 
 Also called text field, text input, number input, search field.
 

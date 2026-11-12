@@ -168,6 +168,41 @@ describe('useAnchoredPanel — review follow-ups', () => {
     expect(vm.panelStyle.top).toBe('146px')
   })
 
+  it('a trigger riding in on a surface that slides, with no scroll and no resize, gets its panel as it arrives', async () => {
+    // A drawer still on its way in: its fields stand past the right edge for a frame or two.
+    const trigger = { left: window.innerWidth + 37, right: window.innerWidth + 77 }
+    const vm = await opened({}, trigger)
+    expect(vm.panelStyle.visibility).toBe('hidden')
+    Object.assign(trigger, { left: 400, right: 440 })
+    await new Promise((resolve) => requestAnimationFrame(resolve))
+    for (let i = 0; i < 3; i++) await Promise.resolve()
+    expect(vm.panelStyle.visibility).toBeUndefined()
+    expect(vm.panelStyle.left).toBe('400px')
+  })
+
+  it('it looks for a trigger out of the window only as long as a motion lasts, then leaves it to the scroll', async () => {
+    const w = mount(Placed, { props: {}, attachTo: document.body })
+    mounted.push(w)
+    boxes(w, { top: -919, bottom: -883 })
+    const el = w.find('button').element
+    const measure = el.getBoundingClientRect
+    let looks = 0
+    el.getBoundingClientRect = () => (looks++, measure())
+    const vm = w.vm as unknown as Placed
+    vm.open = true
+    await new Promise((resolve) => setTimeout(resolve, 650))
+    expect(vm.panelStyle.visibility).toBe('hidden')
+    const after = looks
+    expect(after).toBeGreaterThan(1)
+    await new Promise((resolve) => setTimeout(resolve, 150))
+    expect(looks).toBe(after)
+    // The scroll still brings it back.
+    boxes(w, {})
+    window.dispatchEvent(new Event('scroll'))
+    for (let i = 0; i < 3; i++) await Promise.resolve()
+    expect(vm.panelStyle.visibility).toBeUndefined()
+  })
+
   it('the focus a hidden panel dropped goes back to its control when the trigger returns', async () => {
     const trigger = { top: 100, bottom: 140 }
     const vm = await opened({}, trigger)

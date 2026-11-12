@@ -2,7 +2,7 @@
 
 > Move between pages with Previous, Next and page numbers below a list or table.
 
-A component of grani-ui 0.1.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/pagination
+A component of grani-ui 0.2.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/pagination
 
 Also called pager, page navigation.
 

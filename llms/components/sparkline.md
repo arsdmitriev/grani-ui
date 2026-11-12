@@ -2,7 +2,7 @@
 
 > See a value's recent trend beside the number, with gaps where data is missing.
 
-A component of grani-ui 0.1.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/sparkline
+A component of grani-ui 0.2.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/sparkline
 
 Also called mini chart, trend line, inline chart.
 

@@ -280,6 +280,18 @@ const text = {
   'grani.toast.close': 'Close: {title}',
   'grani.toast.failed': 'Could not complete the action',
   'grani.toast.done': 'Done',
+  'grani.quiz.progress': 'Question {n} of {max}',
+  'grani.quiz.one': 'Choose one',
+  'grani.quiz.any': 'Choose any that apply',
+  'grani.quiz.required': 'Choose an answer to continue.',
+  'grani.quiz.other': 'Another answer',
+  'grani.quiz.otherHint': 'Type another answer…',
+  'grani.quiz.next': 'Next',
+  'grani.quiz.send': 'Send',
+  'grani.quiz.back': 'Back',
+  'grani.quiz.skip': 'Skip',
+  'grani.quiz.enter': 'or press',
+  'grani.quiz.failed': 'Could not send the answers',
 } satisfies Messages
 
 /** Every key grani asks for; a dictionary of the app's language is complete when it has them all. */

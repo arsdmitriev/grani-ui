@@ -2,7 +2,7 @@
 
 > See how much of a task or target is complete when its progress can be measured.
 
-A component of grani-ui 0.1.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/progress
+A component of grani-ui 0.2.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/progress
 
 Also called progress bar, loading bar.
 
