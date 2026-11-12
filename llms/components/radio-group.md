@@ -2,7 +2,7 @@
 
 > Choose one answer from a short list, cards or a segmented bar; the whole row or card is the click target.
 
-A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/radio-group
+A component of grani-ui 0.2.1. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/radio-group
 
 Also called radio buttons, segmented control, option cards.
 

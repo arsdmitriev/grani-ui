@@ -2,7 +2,7 @@
 
 > Choose which columns to show and keep that choice for later visits in the same browser.
 
-A component of grani-ui 0.2.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/table-columns
+A component of grani-ui 0.2.1. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/table-columns
 
 Also called column picker, column visibility, show hide columns.
 

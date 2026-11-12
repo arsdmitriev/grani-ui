@@ -2,7 +2,7 @@
 
 > Change an on/off setting immediately, returning to the previous position if the app rejects the change.
 
-A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/switch
+A component of grani-ui 0.2.1. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/switch
 
 Also called toggle, toggle switch, on off switch.
 

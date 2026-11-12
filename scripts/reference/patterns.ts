@@ -1412,6 +1412,8 @@ export const PATTERNS: Record<string, PatternEntry> = {
     who: 'library',
     moment: 'answer',
     proof: {
+      UiQuiz:
+        'a pick the app refuses puts the tiles back on the answers, a radio and a checkbox alike',
       UiTimePicker: 'a change the parent refuses puts the picker back on the model',
       UiTextarea: [
         'a change the parent refuses puts the textarea back on the model',

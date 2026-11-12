@@ -2,7 +2,7 @@
 
 > Open a menu of available actions, such as exporting records, changing a row or managing your account.
 
-A component of grani-ui 0.2.0. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/menu
+A component of grani-ui 0.2.1. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/menu
 
 Also called dropdown menu, context menu, action menu.
 

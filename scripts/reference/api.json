@@ -5117,10 +5117,15 @@
           "doc": "Sends the answers from the last question. The quiz waits for it; a rejection keeps the question and raises a toast."
         },
         {
-          "name": "sendLabel",
+          "name": "submitLabel",
           "type": "string",
           "default": "\"\"",
           "doc": "The last question's button, the act itself: \"Save plan\" beats \"Send\"."
+        },
+        {
+          "name": "sendLabel",
+          "type": "string",
+          "default": "\"\""
         },
         {
           "name": "variant",
@@ -5163,7 +5168,11 @@
         "decisions": [
           {
             "label": "Questions",
-            "text": "A question is data: `name`, `title`, its `options`, and what it allows (`multiple`, `required`, `other`). The answers stand in the model under the question's name: an answer or `null`, a list for a question with `multiple`."
+            "text": "A question is data: `name`, `title`, its `options`, and what it allows (`multiple`, `required`, `other`). The answers stand in the model under the question's name: an answer or `null`, a list for a question with `multiple`. The app's model holds what was answered; what a send hands over names every question, with `null` or an empty list where no answer was given."
+          },
+          {
+            "label": "Refusal",
+            "text": "The tiles show the answers the app holds: a pick the app refuses, by leaving the model as it was, goes back, the native radio or box with it, and so does a form reset."
           },
           {
             "label": "Tiles",
@@ -5175,7 +5184,11 @@
           },
           {
             "label": "Own answer",
-            "text": "`other` adds a field after the tiles. Its text, trimmed, is the answer as soon as it is typed; in a list it stands beside the tiles chosen. A tile chosen after that leaves the text in the field, no longer the answer; the focus back in the field makes it the answer again. An answer that matches no option is read as one's own, so a saved answer comes back into the field: only in a question with `other`, and only the first such value of a list. Any other value no option has (an option the app has removed since) is no answer: nothing is chosen, a `required` question still asks, and the quiz leaves the value as it is. Names are one per question and values one per answer; in development the console names a repeat."
+            "text": "`other` adds a field after the tiles. Its text, trimmed, is the answer as soon as it is typed; in a list it stands beside the tiles chosen. A tile chosen after that leaves the text in the field, no longer the answer; a press in the field, its key or more typing makes it the answer again, and the focus passing through it by Tab does not. An answer that matches no option is read as one's own, so a saved answer comes back into the field: only in a question with `other`, and only the first such value of a list. Any other value no option has (an option the app has removed since) is no answer: nothing is chosen, a `required` question still asks, and the quiz leaves the value as it is. Names are one per question and values one per answer, never empty: an empty value reads as no answer. In development the console names a repeat and an empty value."
+          },
+          {
+            "label": "Names",
+            "text": "Two Vue apps on one page each need their own `app.config.idPrefix`, or the ids they generate meet and one quiz is named by the other's question."
           },
           {
             "label": "Moving",

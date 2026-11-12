@@ -2,7 +2,7 @@
 
 > Filter records by a period such as “This month”, which stays current, or choose two dates in either order.
 
-A component of grani-ui 0.2.0. Dates, stable, since 0.1.0. Page: https://grani.arseni.work/components/date-range
+A component of grani-ui 0.2.1. Dates, stable, since 0.1.0. Page: https://grani.arseni.work/components/date-range
 
 Also called date range picker, period picker, period filter.
 

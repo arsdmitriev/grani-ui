@@ -803,6 +803,14 @@
     outline-offset: 1px;
   }
 
+  /* A card of a choice (a radio card, a quiz's tile) rings its keyboard focus with a shadow, which
+     forced colors drop, and the radio inside is too small to carry an outline anyone would see:
+     the card takes it, as a segment does. */
+  :root .ui-choice:has(:focus-visible) {
+    outline: 2px solid CanvasText;
+    outline-offset: 1px;
+  }
+
   /* A selected row is a tint, which forced colors drop: a highlight frame inside the row says it. */
   :root .ui-row-selected {
     outline: 2px solid Highlight;

@@ -2,7 +2,7 @@
 
 > Search for and choose one or more options. Enter selects an option without also submitting the form.
 
-A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/select
+A component of grani-ui 0.2.1. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/select
 
 Also called dropdown, combobox, autocomplete, searchable select.
 

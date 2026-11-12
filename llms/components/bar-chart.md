@@ -2,7 +2,7 @@
 
 > Compare amounts across periods with grouped or stacked bars and a plan line, with a marker for a period still in progress.
 
-A component of grani-ui 0.2.0. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/bar-chart
+A component of grani-ui 0.2.1. Charts, stable, since 0.1.0. Page: https://grani.arseni.work/components/bar-chart
 
 Also called column chart, histogram.
 

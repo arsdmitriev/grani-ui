@@ -572,7 +572,7 @@ export const REGISTRY: Record<string, RegistryEntry> = {
   },
   UiQuiz: {
     level: 'component',
-    status: 'experimental',
+    status: 'stable',
     family: 'form',
     since: '0.2.0',
     aka: ['questionnaire', 'survey', 'multi-step questions', 'onboarding questions'],

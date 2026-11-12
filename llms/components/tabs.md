@@ -2,7 +2,7 @@
 
 > Switch between sections of the same screen without showing them all at once.
 
-A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/tabs
+A component of grani-ui 0.2.1. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/tabs
 
 Also called tab bar, tab strip, tabbed navigation.
 

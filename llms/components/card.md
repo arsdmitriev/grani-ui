@@ -2,7 +2,7 @@
 
 > Group one part of a page into a card with a title, content and an optional footer.
 
-A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/card
+A component of grani-ui 0.2.1. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/card
 
 Also called panel, section card.
 

@@ -2,6 +2,27 @@
 
 Before 1.0 a minor version may include a breaking change; its section then says how to move.
 
+## 0.2.1 — 2026-11-12
+
+UiQuiz moves from experimental to stable, with fixes to controlled values, keyboard interaction and
+accessibility.
+
+- Changed UiQuiz: moved from experimental to stable.
+- Changed UiQuiz: renamed `sendLabel` to `submitLabel`. `sendLabel` is deprecated, remains supported
+  throughout 0.2.x and will be removed in 0.3.0.
+- Fixed UiQuiz: the submitted answers include every question, with `null` or `[]` for one left
+  unanswered, as documented. In 0.2.0 an optional question passed with Next was missing from the
+  object.
+- Fixed UiQuiz: if the parent rejects a selection, the quiz restores the controlled value and keeps
+  its visual and accessible states in sync.
+- Fixed UiQuiz: tabbing through the custom answer field no longer selects its text as the answer.
+  Clicking the field, pressing its shortcut key or typing does.
+- Fixed UiQuiz: a long unbroken word in a question or an answer wraps inside its tile.
+- Fixed UiQuiz: a `#done` slot provided after submission is rendered.
+- Fixed UiQuiz: a numpad key that acts as an arrow with NumLock off no longer selects an answer.
+- Fixed UiRadioGroup: keyboard focus on a card option is outlined in forced-colors mode. The same
+  applies to quiz tiles.
+
 ## 0.2.0 — 2026-11-12
 
 UiQuiz presents one question at a time, with answer tiles, keyboard shortcuts, and a custom answer
@@ -14,19 +35,18 @@ field.
 - Added UiQuiz sending: the quiz awaits submission, prevents duplicate requests while sending, and
   keeps the answers if submission fails.
 - Added UiQuiz progress: a segmented top edge and a question counter track progress;
-  `variant="plain"` removes the card frame when the quiz stands in a window.
-- Fixed Panels: a list, a menu or a popover opened while its control is still sliding in with a
-  drawer is shown when the control arrives; it stayed hidden, though open.
+  `variant="plain"` removes the card frame inside UiModal or UiDrawer.
+- Fixed Panels: a list, a menu or a popover opened while its trigger is still sliding in with a
+  drawer is shown once the trigger is in place. Previously it stayed hidden while reporting itself
+  open.
 
 ## 0.1.0 — 2026-10-27
 
-The first version brings 95 interaction patterns for admin apps, each with a live example, and the
-63 Vue components that keep them (66 with the parts they are built from).
+The first version brings 95 interaction patterns for admin apps, each with a live example, and
+63 Vue components that implement them.
 
-A pattern says what a person gets on the screen: where keyboard focus goes, what stays in view
-while a request runs, how a refused value or a finished action is reported. The components keep
-the patterns in forms, tables, charts, navigation and overlays, in light and dark themes, in
-English and Russian.
+A pattern describes what a person gets on the screen: where keyboard focus goes, what stays in view
+during a request, how a rejected value or a finished action is reported.
 
 - Added Patterns: 95 patterns in six chapters, from keyboard focus and loading states to errors
   and feedback; each has a live example, names the components that keep it, and most are backed

@@ -2,7 +2,7 @@
 
 > See a short message about an action's progress or result, with an action such as Undo when available.
 
-A component of grani-ui 0.2.0. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/toaster
+A component of grani-ui 0.2.1. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/toaster
 
 Also called toast, notifications, snackbar.
 

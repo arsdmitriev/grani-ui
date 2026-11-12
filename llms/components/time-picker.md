@@ -2,7 +2,7 @@
 
 > Choose hours and minutes or type a time such as 2:30p or 1430. A valid time is kept even if it is not among the listed options.
 
-A component of grani-ui 0.2.0. Dates, stable, since 0.1.0. Page: https://grani.arseni.work/components/time-picker
+A component of grani-ui 0.2.1. Dates, stable, since 0.1.0. Page: https://grani.arseni.work/components/time-picker
 
 Also called time input, time field.
 

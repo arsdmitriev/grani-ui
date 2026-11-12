@@ -2,7 +2,7 @@
 
 > Open a small panel of options beside a button while keeping the rest of the page available.
 
-A component of grani-ui 0.2.0. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/popover
+A component of grani-ui 0.2.1. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/popover
 
 Also called dropdown panel, flyout, popup.
 

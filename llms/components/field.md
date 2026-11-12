@@ -2,7 +2,7 @@
 
 > Give a control its label, hint and error message, connected so a screen reader reads them with it.
 
-A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/field
+A component of grani-ui 0.2.1. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/field
 
 Also called form field, form group, label with hint and error.
 

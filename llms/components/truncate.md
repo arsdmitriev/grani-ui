@@ -2,7 +2,7 @@
 
 > Keep a long value on one line with an ellipsis, and reveal the full text on hover or tap when it does not fit.
 
-A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/truncate
+A component of grani-ui 0.2.1. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/truncate
 
 Also called ellipsis, text overflow, truncated text.
 

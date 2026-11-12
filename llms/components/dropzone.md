@@ -2,7 +2,7 @@
 
 > Add files by dragging or browsing; a message names each file that cannot be added and says why.
 
-A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/dropzone
+A component of grani-ui 0.2.1. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/dropzone
 
 Also called file upload, file input, drag and drop upload, uploader.
 

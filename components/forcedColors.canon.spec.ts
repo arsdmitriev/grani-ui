@@ -9,6 +9,7 @@ import UiButton from './UiButton.vue'
 import UiCheckbox from './UiCheckbox.vue'
 import UiIconButton from './UiIconButton.vue'
 import UiProgress from './UiProgress.vue'
+import UiQuiz from './UiQuiz.vue'
 import UiRadio from './UiRadio.vue'
 import UiRadioGroup from './UiRadioGroup.vue'
 import UiSwitch from './UiSwitch.vue'
@@ -104,6 +105,18 @@ describe('forced colors', () => {
     })
     expect(radio.find('input:disabled ~ .ui-mark-dot').exists()).toBe(true)
     expect(unlayered).toMatch(/input:disabled ~ \.ui-mark-dot \{[^}]*background: GrayText/)
+  })
+
+  it('keyboard focus on a card of a choice is an outline: its ring is a shadow, which forced colors drop', () => {
+    // The radio itself is too small to carry it: the card around it does, as a segment's does.
+    expect(unlayered).toMatch(/\.ui-choice:has\(:focus-visible\) \{[^}]*outline: 2px solid/)
+    const quiz = mount(UiQuiz, {
+      props: {
+        questions: [{ name: 'q', title: 'Pick', options: [{ value: 'a', label: 'A' }] }],
+        modelValue: {},
+      },
+    })
+    expect(quiz.find('label').classes()).toContain('ui-choice')
   })
 
   it('a selected row carries a frame that survives forced colors', () => {

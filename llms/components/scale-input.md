@@ -2,7 +2,7 @@
 
 > Give a rating on a short labeled scale and, where clearing is allowed, take it back by choosing the same value again.
 
-A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/scale-input
+A component of grani-ui 0.2.1. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/scale-input
 
 Also called rating, nps scale, likert scale, score input.
 

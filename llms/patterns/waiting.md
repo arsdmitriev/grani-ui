@@ -44,8 +44,8 @@ A field always shows the value the app holds, so you can tell whether an edit to
 Why: You see at once that a change did not take effect, instead of finding out later that the screen and the app disagree.
 
 Held by the library by itself.
-Where: [Textarea](https://grani.arseni.work/components/textarea), [Switch](https://grani.arseni.work/components/switch), [Checkbox](https://grani.arseni.work/components/checkbox), [Radio group](https://grani.arseni.work/components/radio-group), [Stepper](https://grani.arseni.work/components/stepper), [Time picker](https://grani.arseni.work/components/time-picker), [Select](https://grani.arseni.work/components/select), [Scale input](https://grani.arseni.work/components/scale-input), [List field](https://grani.arseni.work/components/list-field), [Password field](https://grani.arseni.work/components/password-field), [Input](https://grani.arseni.work/components/input), [Dropzone](https://grani.arseni.work/components/dropzone), [Code input](https://grani.arseni.work/components/code-input).
-Tests: 14, named in patterns/tests.md beside this chapter
+Where: [Textarea](https://grani.arseni.work/components/textarea), [Switch](https://grani.arseni.work/components/switch), [Checkbox](https://grani.arseni.work/components/checkbox), [Radio group](https://grani.arseni.work/components/radio-group), [Stepper](https://grani.arseni.work/components/stepper), [Time picker](https://grani.arseni.work/components/time-picker), [Select](https://grani.arseni.work/components/select), [Scale input](https://grani.arseni.work/components/scale-input), [List field](https://grani.arseni.work/components/list-field), [Password field](https://grani.arseni.work/components/password-field), [Input](https://grani.arseni.work/components/input), [Dropzone](https://grani.arseni.work/components/dropzone), [Code input](https://grani.arseni.work/components/code-input), [Quiz](https://grani.arseni.work/components/quiz).
+Tests: 15, named in patterns/tests.md beside this chapter
 Link: https://grani.arseni.work/patterns/waiting#refused-goes-back
 
 ## Keep the chart when a refresh fails

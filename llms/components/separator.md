@@ -2,7 +2,7 @@
 
 > Separate groups in a menu, toolbar or card with a simple dividing line.
 
-A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/separator
+A component of grani-ui 0.2.1. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/separator
 
 Also called divider, horizontal rule.
 

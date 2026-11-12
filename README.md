@@ -30,21 +30,21 @@ An app needs:
 
 ## What's inside
 
-A stable component passed the checks and a review by eye of its behavior, its example and its
-code. An experimental one passed the checks and waits for that review; it is marked on its card in
-the showcase and on its page in `llms/`: its API or behavior may still change in a 0.x minor, and
-the CHANGELOG says how to move.
+Every component below is stable: it passed the checks and a review by eye of its behavior, its
+example and its code. A component added later may start as experimental, marked on its card in the
+showcase and on its page in `llms/`: its API or behavior may still change in a 0.x minor, and the
+CHANGELOG says how to move.
 
-| Family   | Stable                                                                                                                                                     | Experimental |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| Data     | UiAvatar, UiDataTable, UiFilter, UiFilterList, UiLog, UiPagination, UiTable, UiTableColumns, UiTableToolbar                                                |              |
-| Charts   | UiAreaChart, UiBarChart, UiChartCard, UiDelta, UiDonutChart, UiSparkline                                                                                   |              |
-| Form     | UiCheckbox, UiCodeInput, UiDropzone, UiField, UiInput, UiListField, UiPasswordField, UiRadioGroup, UiScaleInput, UiSelect, UiStepper, UiSwitch, UiTextarea | UiQuiz       |
-| Dates    | UiCalendar, UiDatePicker, UiDateRange, UiTimePicker                                                                                                        |              |
-| Actions  | UiButton, UiButtonGroup, UiCopyButton, UiIconButton, UiLink                                                                                                |              |
-| Overlays | UiConfirm, UiCrudDrawer, UiDrawer, UiMenu, UiModal, UiPopover, UiToaster, UiTooltip                                                                        |              |
-| Layout   | UiAppShell, UiAspectRatio, UiCard, UiHeader, UiList, UiListItem, UiReveal, UiSeparator, UiStack, UiTabs, UiTruncate                                        |              |
-| Status   | UiBadge, UiCount, UiIndicator, UiNoData, UiProgress, UiSkeleton, UiSpinner                                                                                 |              |
+| Family   | Components                                                                                                                                                         |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Data     | UiAvatar, UiDataTable, UiFilter, UiFilterList, UiLog, UiPagination, UiTable, UiTableColumns, UiTableToolbar                                                        |
+| Charts   | UiAreaChart, UiBarChart, UiChartCard, UiDelta, UiDonutChart, UiSparkline                                                                                           |
+| Form     | UiCheckbox, UiCodeInput, UiDropzone, UiField, UiInput, UiListField, UiPasswordField, UiQuiz, UiRadioGroup, UiScaleInput, UiSelect, UiStepper, UiSwitch, UiTextarea |
+| Dates    | UiCalendar, UiDatePicker, UiDateRange, UiTimePicker                                                                                                                |
+| Actions  | UiButton, UiButtonGroup, UiCopyButton, UiIconButton, UiLink                                                                                                        |
+| Overlays | UiConfirm, UiCrudDrawer, UiDrawer, UiMenu, UiModal, UiPopover, UiToaster, UiTooltip                                                                                |
+| Layout   | UiAppShell, UiAspectRatio, UiCard, UiHeader, UiList, UiListItem, UiReveal, UiSeparator, UiStack, UiTabs, UiTruncate                                                |
+| Status   | UiBadge, UiCount, UiIndicator, UiNoData, UiProgress, UiSkeleton, UiSpinner                                                                                         |
 
 Three parts come with their whole and are imported beside it: UiDateCell and UiMoneyCell, the
 cells of UiTable, and UiRadio, an option of UiRadioGroup.

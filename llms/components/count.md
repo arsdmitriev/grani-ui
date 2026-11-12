@@ -2,7 +2,7 @@
 
 > Show a compact count beside a label, or a dot when only the presence of an update matters.
 
-A component of grani-ui 0.2.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/count
+A component of grani-ui 0.2.1. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/count
 
 Also called counter badge, count badge, notification count.
 

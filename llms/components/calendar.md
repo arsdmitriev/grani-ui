@@ -2,7 +2,7 @@
 
 > Choose a day or date range from a month view, using the mouse or keyboard.
 
-A component of grani-ui 0.2.0. Dates, stable, since 0.1.0. Page: https://grani.arseni.work/components/calendar
+A component of grani-ui 0.2.1. Dates, stable, since 0.1.0. Page: https://grani.arseni.work/components/calendar
 
 Also called date grid, month view, inline calendar.
 

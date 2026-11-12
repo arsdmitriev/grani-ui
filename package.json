@@ -1,6 +1,6 @@
 {
   "name": "grani-ui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Interaction patterns for admin apps, and the Vue 3 components that keep them: focus, late answers, loading, errors. Most proved by a test. Tailwind CSS 4, typed, SSR-ready.",
   "keywords": [
     "interaction-patterns",

@@ -3,11 +3,11 @@
 > Screens built with grani behave alike: the focus comes back where it was, a late answer never replaces a newer search, typed text that failed to add comes back to its field.
 > The interaction patterns below say how, most of them proved by a test.
 
-Version 0.2.0. Interaction patterns for admin apps, and the Vue 3 components that keep them: focus, late answers, loading, errors. Most proved by a test. Tailwind CSS 4, typed, SSR-ready.
+Version 0.2.1. Interaction patterns for admin apps, and the Vue 3 components that keep them: focus, late answers, loading, errors. Most proved by a test. Tailwind CSS 4, typed, SSR-ready.
 
 ## How to use this reference
 
-1. Check the installed grani-ui version (`npm ls grani-ui`); this text is 0.2.0.
+1. Check the installed grani-ui version (`npm ls grani-ui`); this text is 0.2.1.
 2. Choose components from the catalog, or start from the task below.
 3. Read a component's page before writing code: its whole example, its API and what it leaves to the app.
 4. Use only the documented props, events and slots.

@@ -2,7 +2,7 @@
 
 > Open details where you need them and collapse them again without leaving the page.
 
-A component of grani-ui 0.2.0. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/reveal
+A component of grani-ui 0.2.1. Layout, stable, since 0.1.0. Page: https://grani.arseni.work/components/reveal
 
 Also called accordion, collapsible, disclosure, expandable section.
 

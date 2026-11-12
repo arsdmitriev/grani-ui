@@ -4,7 +4,11 @@
 
   Questions. A question is data: `name`, `title`, its `options`, and what it allows (`multiple`,
   `required`, `other`). The answers stand in the model under the question's name: an answer or
-  `null`, a list for a question with `multiple`.
+  `null`, a list for a question with `multiple`. The app's model holds what was answered; what a
+  send hands over names every question, with `null` or an empty list where no answer was given.
+
+  Refusal. The tiles show the answers the app holds: a pick the app refuses, by leaving the model
+  as it was, goes back, the native radio or box with it, and so does a form reset.
 
   Tiles. The whole tile is the target: a press anywhere on it, its description and its key cap
   included, answers. The chosen tile wears a bar of the brand at its start edge over a muted band,
@@ -20,12 +24,17 @@
 
   Own answer. `other` adds a field after the tiles. Its text, trimmed, is the answer as soon as it
   is typed; in a list it stands beside the tiles chosen. A tile chosen after that leaves the text
-  in the field, no longer the answer; the focus back in the field makes it the answer again. An
+  in the field, no longer the answer; a press in the field, its key or more typing makes it the
+  answer again, and the focus passing through it by Tab does not. An
   answer that matches no option is read as one's own, so a saved answer comes back into the field:
   only in a question with `other`, and only the first such value of a list. Any other value no
   option has (an option the app has removed since) is no answer: nothing is chosen, a `required`
   question still asks, and the quiz leaves the value as it is. Names are one per question and
-  values one per answer; in development the console names a repeat.
+  values one per answer, never empty: an empty value reads as no answer. In development the
+  console names a repeat and an empty value.
+
+  Names. Two Vue apps on one page each need their own `app.config.idPrefix`, or the ids they
+  generate meet and one quiz is named by the other's question.
 
   Moving. Next is never turned off: on a `required` question with no answer it says so under the
   question, puts the focus on the first answer and stays. Skip stands only on a question that is
@@ -98,7 +107,6 @@
   <form
     v-if="questions.length"
     v-bind="$attrs"
-    ref="formRef"
     class="relative flex flex-col gap-6 text-sm text-fg"
     :class="
       variant === 'outline'
@@ -108,6 +116,7 @@
     novalidate
     :aria-busy="busy || undefined"
     @submit.prevent="onSubmit"
+    @reset="onReset"
     @keydown="onKeydown"
   >
     <div v-if="finished" ref="doneRef" tabindex="-1" class="focus:outline-hidden">
@@ -152,10 +161,17 @@
       >
         <div class="flex flex-col gap-2">
           <p :id="`${uid}-count`" class="text-xs text-fg-muted tabular-nums">{{ progressText }}</p>
-          <p :id="`${uid}-title`" class="text-xl font-semibold tracking-tight text-balance">
+          <p
+            :id="`${uid}-title`"
+            class="text-xl font-semibold tracking-tight text-balance [overflow-wrap:anywhere]"
+          >
             {{ question.title }}
           </p>
-          <p v-if="question.description" :id="`${uid}-description`" class="text-base text-fg-muted">
+          <p
+            v-if="question.description"
+            :id="`${uid}-description`"
+            class="text-base text-fg-muted [overflow-wrap:anywhere]"
+          >
             {{ question.description }}
           </p>
           <p :id="`${uid}-hint`" class="text-fg-muted">
@@ -192,8 +208,12 @@
             />
             <kbd v-if="capOf(i)" aria-hidden="true" :class="KEYCAP">{{ capOf(i) }}</kbd>
             <span class="flex min-w-0 flex-1 flex-col">
-              <span class="font-medium">{{ option.label }}</span>
-              <span v-if="option.description" :id="`${uid}-option-${i}`" class="text-fg-muted">
+              <span class="font-medium [overflow-wrap:anywhere]">{{ option.label }}</span>
+              <span
+                v-if="option.description"
+                :id="`${uid}-option-${i}`"
+                class="text-fg-muted [overflow-wrap:anywhere]"
+              >
                 {{ option.description }}
               </span>
             </span>
@@ -213,7 +233,7 @@
               :placeholder="t('grani.quiz.otherHint')"
               :disabled="busy"
               @update:model-value="setOther(String($event ?? ''))"
-              @focus="reclaim"
+              @pointerdown="reclaim"
             >
               <template v-if="capOf(question.options.length)" #start>
                 <kbd aria-hidden="true" :class="KEYCAP">{{ capOf(question.options.length) }}</kbd>
@@ -224,7 +244,7 @@
       </div>
       <div class="flex flex-wrap items-center gap-2">
         <UiButton type="submit" variant="primary" size="md" :loading="busy" loading-text="">
-          {{ last ? sendLabel || t('grani.quiz.send') : t('grani.quiz.next') }}
+          {{ last ? submitLabel || sendLabel || t('grani.quiz.send') : t('grani.quiz.next') }}
         </UiButton>
         <span
           v-if="keys !== 'none'"
@@ -263,6 +283,7 @@ import { isDev, warnOnce } from '../utils/dev'
 import { TYPED_FIELD } from '../utils/focusInvalid'
 import { isHeldPress } from '../utils/held'
 import { isImeKey } from '../utils/ime'
+import { useSlotsSeen } from '../utils/slotsSeen'
 import UiButton from './UiButton.vue'
 import UiInput from './UiInput.vue'
 
@@ -281,11 +302,20 @@ const props = withDefaults(
     /** Sends the answers from the last question. The quiz waits for it; a rejection keeps the question and raises a toast. */
     action?: (answers: QuizAnswers) => unknown
     /** The last question's button, the act itself: "Save plan" beats "Send". */
+    submitLabel?: string
+    /** @deprecated The name `submitLabel` had in 0.2.0: it still works, and goes in the next minor. */
     sendLabel?: string
     /** `outline` is a card of its own, its top edge the progress; `plain` draws no card and no edge, for a window or a drawer that already frames it. */
     variant?: 'outline' | 'plain'
   }>(),
-  { step: undefined, keys: 'numbers', action: undefined, sendLabel: '', variant: 'outline' },
+  {
+    step: undefined,
+    keys: 'numbers',
+    action: undefined,
+    submitLabel: '',
+    sendLabel: '',
+    variant: 'outline',
+  },
 )
 
 const emit = defineEmits<{
@@ -301,7 +331,8 @@ const slots = defineSlots<{
   /** What stands in place of the questions after a send: a thank-you, what happens next. */
   done(props: Record<string, never>): any
 }>()
-const seen = slots ?? useSlots()
+// Read again before every render: a `#done` that comes after the send is seen (utils/slotsSeen).
+const seen = useSlotsSeen(slots ?? useSlots())
 
 const { t } = useUiT()
 const toast = useToast()
@@ -311,6 +342,12 @@ const uid = useId()
 // read as one. Said once per app and name, in development.
 if (isDev()) {
   const app = getCurrentInstance()?.appContext.app
+  if (props.sendLabel)
+    warnOnce(
+      app,
+      'UiQuiz:sendLabel',
+      '[grani] UiQuiz: `sendLabel` is `submitLabel` now, as a drawer names its button. The old name works in 0.2 and goes in the next minor.',
+    )
   watch(
     () => props.questions,
     (questions) => {
@@ -332,6 +369,12 @@ if (isDev()) {
               `[grani] UiQuiz: the question ${JSON.stringify(q.name)} has two answers with the value ${JSON.stringify(o.value)}: choosing one chooses both. Give each answer its own value.`,
             )
           values.add(o.value)
+          if (o.value === '')
+            warnOnce(
+              app,
+              `UiQuiz:empty:${q.name}`,
+              `[grani] UiQuiz: the question ${JSON.stringify(q.name)} has an answer with an empty value, which reads as no answer and cannot be chosen. Give the answer a value of its own.`,
+            )
         }
       }
     },
@@ -343,7 +386,6 @@ if (isDev()) {
 const KEYCAP =
   'inline-flex h-5 min-w-5 shrink-0 items-center justify-center rounded-badge border border-b-2 border-border bg-surface px-1 font-mono text-xs/none text-fg-muted'
 
-const formRef = ref<HTMLFormElement | null>(null)
 const groupRef = ref<HTMLElement | null>(null)
 const doneRef = ref<HTMLElement | null>(null)
 const otherRef = ref<InstanceType<typeof UiInput> | null>(null)
@@ -442,9 +484,25 @@ function set(q: QuizQuestion, answer: string | string[] | null) {
   emit('update:modelValue', { ...props.modelValue, [q.name]: answer })
 }
 
+// The browser checks a radio or a box before the app hears of it. If the app refuses the answer,
+// nothing reactive moves, and the input would stay on what was pressed while the tile shows what
+// is held: after the app's turn every mark goes back to the answers.
+const marks = () => [
+  ...(groupRef.value?.querySelectorAll<HTMLInputElement>(
+    'input[type="radio"], input[type="checkbox"]',
+  ) ?? []),
+]
+const settle = () =>
+  void nextTick(() => {
+    for (const mark of marks()) mark.checked = chosen(mark.value)
+  })
+// A form reset unchecks them too and fires no change: the browser writes after the event.
+const onReset = () => setTimeout(settle)
+
 function pick(value: string) {
   const q = question.value
   if (!q || busy.value) return
+  settle()
   if (!q.multiple) return set(q, value)
   const now = held(q)
   set(q, now.includes(value) ? now.filter((v) => v !== value) : [...now, value])
@@ -467,7 +525,8 @@ function setOther(text: string) {
   else if (ownOf(q)) set(q, null)
 }
 
-// The focus back in a field that holds text: in a question of one answer it is the answer again.
+// A press in a field that holds text, or its key: in a question of one answer the text is the
+// answer again. Never the focus alone: on the way to Next by Tab it passes through the field.
 function reclaim() {
   const q = question.value
   if (!q || q.multiple || busy.value) return
@@ -479,13 +538,11 @@ function reclaim() {
 function focusAnswer() {
   const group = groupRef.value
   if (!group) return
-  const marks = [
-    ...group.querySelectorAll<HTMLInputElement>('input[type="radio"], input[type="checkbox"]'),
-  ].filter((input) => !input.disabled)
-  const mark = marks.find((input) => input.checked)
+  const on = marks().filter((input) => !input.disabled)
+  const mark = on.find((input) => chosen(input.value))
   if (mark) mark.focus()
   else if (ownChosen.value) otherRef.value?.focus()
-  else marks[0]?.focus()
+  else on[0]?.focus()
 }
 
 function go(to: number) {
@@ -495,7 +552,10 @@ function go(to: number) {
   void nextTick(focusAnswer)
 }
 
-async function send(answers: QuizAnswers) {
+async function send(held: QuizAnswers) {
+  // What is sent names every question: `null`, or an empty list, where no answer was given.
+  const answers: QuizAnswers = { ...held }
+  for (const q of props.questions) answers[q.name] ??= q.multiple ? [] : null
   const mine = ++run
   busy.value = true
   try {
@@ -566,6 +626,8 @@ function indexOfKey(e: KeyboardEvent): number {
         ? /^Key([A-I])$/.exec(e.code)
         : null
   if (!match) return -1
+  // With NumLock off a numpad key is an arrow or Home under the same code: its key says which.
+  if (e.code.startsWith('Numpad') && !/^[1-9]$/.test(e.key)) return -1
   return props.keys === 'numbers' ? Number(match[1]) - 1 : match[1]!.charCodeAt(0) - 65
 }
 
@@ -581,13 +643,12 @@ function onKeydown(e: KeyboardEvent) {
   if (i < q.options.length) {
     e.preventDefault()
     pick(q.options[i]!.value)
-    groupRef.value
-      ?.querySelectorAll<HTMLInputElement>('input[type="radio"], input[type="checkbox"]')
-      [i]?.focus()
+    marks()[i]?.focus()
   } else if (i === q.options.length && q.other) {
     // Prevented, or the key would be typed into the field it has just focused.
     e.preventDefault()
     otherRef.value?.focus()
+    reclaim()
   }
 }
 

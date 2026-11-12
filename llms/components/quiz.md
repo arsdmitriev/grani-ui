@@ -2,7 +2,7 @@
 
 > Ask a few questions one at a time, such as a short survey or the setup of a new workspace, and answer each by a tile, a key or a line of your own.
 
-A component of grani-ui 0.2.0. Form, experimental, since 0.2.0. Page: https://grani.arseni.work/components/quiz
+A component of grani-ui 0.2.1. Form, stable, since 0.2.0. Page: https://grani.arseni.work/components/quiz
 
 Also called questionnaire, survey, multi-step questions, onboarding questions.
 
@@ -71,7 +71,7 @@ function again() {
     v-model="base"
     :questions="questions"
     :action="save"
-    send-label="Create workspace"
+    submit-label="Create workspace"
     class="w-full max-w-xl"
   >
     <template #done>
@@ -100,13 +100,17 @@ Implemented by the app:
 
 A few questions asked one at a time, each answered by a tile, a key or a line of one's own. Take it for a short survey, an onboarding or a brief: three to ten questions of choices.
 
-**Questions.** A question is data: `name`, `title`, its `options`, and what it allows (`multiple`, `required`, `other`). The answers stand in the model under the question's name: an answer or `null`, a list for a question with `multiple`.
+**Questions.** A question is data: `name`, `title`, its `options`, and what it allows (`multiple`, `required`, `other`). The answers stand in the model under the question's name: an answer or `null`, a list for a question with `multiple`. The app's model holds what was answered; what a send hands over names every question, with `null` or an empty list where no answer was given.
+
+**Refusal.** The tiles show the answers the app holds: a pick the app refuses, by leaving the model as it was, goes back, the native radio or box with it, and so does a form reset.
 
 **Tiles.** The whole tile is the target: a press anywhere on it, its description and its key cap included, answers. The chosen tile wears a bar of the brand at its start edge over a muted band, and no radio or check is drawn: the line under the question says whether one answer or several are taken. A chosen answer of a question with one answer is not taken back by a second press: Skip clears it.
 
 **Keys.** `keys` gives the first nine answers a key, the digits or the letters from A, shown on a cap before the answer; `none` shows no cap and hears no key. A key chooses and never turns the page: Enter does. The keys are heard while the focus is inside the quiz, and stay silent in the field of one's own answer, under Ctrl, Alt or Cmd, and while an input method composes a word. A letter is read by its key, not its character, so A answers on any layout.
 
-**Own answer.** `other` adds a field after the tiles. Its text, trimmed, is the answer as soon as it is typed; in a list it stands beside the tiles chosen. A tile chosen after that leaves the text in the field, no longer the answer; the focus back in the field makes it the answer again. An answer that matches no option is read as one's own, so a saved answer comes back into the field: only in a question with `other`, and only the first such value of a list. Any other value no option has (an option the app has removed since) is no answer: nothing is chosen, a `required` question still asks, and the quiz leaves the value as it is. Names are one per question and values one per answer; in development the console names a repeat.
+**Own answer.** `other` adds a field after the tiles. Its text, trimmed, is the answer as soon as it is typed; in a list it stands beside the tiles chosen. A tile chosen after that leaves the text in the field, no longer the answer; a press in the field, its key or more typing makes it the answer again, and the focus passing through it by Tab does not. An answer that matches no option is read as one's own, so a saved answer comes back into the field: only in a question with `other`, and only the first such value of a list. Any other value no option has (an option the app has removed since) is no answer: nothing is chosen, a `required` question still asks, and the quiz leaves the value as it is. Names are one per question and values one per answer, never empty: an empty value reads as no answer. In development the console names a repeat and an empty value.
+
+**Names.** Two Vue apps on one page each need their own `app.config.idPrefix`, or the ids they generate meet and one quiz is named by the other's question.
 
 **Moving.** Next is never turned off: on a `required` question with no answer it says so under the question, puts the focus on the first answer and stays. Skip stands only on a question that is not required, and clears its answer. Back checks nothing and clears nothing. After each move the focus stands in the new question, on its chosen answer or its first. An answer changed on an earlier question leaves the later ones as they are.
 
@@ -372,13 +376,13 @@ const savedStep = ref(1)
 
 ```
 
-### Failed send
+### Sending
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import type { QuizAnswers, QuizQuestion } from 'grani-ui'
-import { UiQuiz } from 'grani-ui'
+import { UiQuiz, UiNoData, UiRadioGroup, UiRadio } from 'grani-ui'
 
 const questions: QuizQuestion[] = [
   {
@@ -422,19 +426,153 @@ const refuse = async () => {
   throw new Error('offline')
 }
 
-const failing = ref<QuizAnswers>({ use: 'orders', digest: [], day: 'monday' })
+// The life of a send, on the last question: what the server does with it is the switch below.
+const sending = ref<QuizAnswers>({ use: 'orders', digest: [], day: 'monday' })
 
-const failingStep = ref(2)
+const sendingStep = ref(2)
+
+const sendingRef = ref<{ restart: () => void } | null>(null)
+
+const answer = ref<'accepts' | 'refuses' | 'slow'>('accepts')
+
+const send = () =>
+  answer.value === 'refuses' ? refuse() : wait(answer.value === 'slow' ? 8000 : 900)
+
+watch(answer, () => {
+  sendingRef.value?.restart()
+  sendingStep.value = 2
+})
 </script>
 
 <template>
-  <UiQuiz
-    v-model="failing"
-    v-model:step="failingStep"
-    :questions="questions"
-    :action="refuse"
-    class="w-full max-w-xl"
-  />
+  <!-- One send from its press to its outcome: busy, then the `#done` slot, or a toast and the
+       question kept. The switch is the server's answer. -->
+  <div class="flex w-full max-w-xl flex-col gap-4">
+    <UiQuiz
+      ref="sendingRef"
+      v-model="sending"
+      v-model:step="sendingStep"
+      :questions="questions"
+      :action="send"
+      submit-label="Create workspace"
+    >
+      <template #done>
+        <UiNoData title="The workspace is ready" description="Your first table is open." />
+      </template>
+    </UiQuiz>
+    <UiRadioGroup v-model="answer" variant="segmented" aria-label="The server">
+      <UiRadio value="accepts">Accepts</UiRadio>
+      <UiRadio value="refuses">Refuses</UiRadio>
+      <UiRadio value="slow">Answers slowly</UiRadio>
+    </UiRadioGroup>
+  </div>
+</template>
+
+```
+
+### In a window
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { QuizAnswers, QuizQuestion } from 'grani-ui'
+import { UiButton, UiModal, UiQuiz } from 'grani-ui'
+
+const questions: QuizQuestion[] = [
+  {
+    name: 'use',
+    title: 'What will you keep in the workspace?',
+    description: 'It sets the first table you see.',
+    required: true,
+    other: true,
+    options: [
+      { value: 'invoices', label: 'Invoices', description: 'What you billed and what was paid.' },
+      { value: 'orders', label: 'Orders', description: 'From the cart to the delivery.' },
+      { value: 'requests', label: 'Support requests', description: 'Who asked and who answered.' },
+    ],
+  },
+  {
+    name: 'digest',
+    title: 'Who gets the weekly digest?',
+    description: 'Skip it to send none.',
+    multiple: true,
+    options: [
+      { value: 'owners', label: 'Owners' },
+      { value: 'managers', label: 'Managers' },
+      { value: 'accountants', label: 'Accountants' },
+    ],
+  },
+  {
+    name: 'day',
+    title: 'When does your week start?',
+    required: true,
+    options: [
+      { value: 'monday', label: 'Monday' },
+      { value: 'sunday', label: 'Sunday' },
+    ],
+  },
+]
+
+const windowed = ref(false)
+
+const inWindow = ref<QuizAnswers>({})
+
+function closeWindow() {
+  windowed.value = false
+  inWindow.value = {}
+}
+</script>
+
+<template>
+  <!-- The window frames it and names it: `plain`, and a window with no form of its own, so
+       Enter is the quiz's. -->
+  <UiButton variant="outline" @click="windowed = true">Set up the workspace</UiButton>
+  <UiModal v-model:open="windowed" title="Set up the workspace" size="md">
+    <UiQuiz v-model="inWindow" :questions="questions" variant="plain" @submit="closeWindow" />
+  </UiModal>
+</template>
+
+```
+
+### Long text
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { QuizAnswers, QuizQuestion } from 'grani-ui'
+import { UiQuiz } from 'grani-ui'
+
+// The worst realistic texts: a question of three lines, an address with no place to break, an
+// answer of one letter.
+const long: QuizQuestion[] = [
+  {
+    name: 'source',
+    title:
+      'Where should the workspace take the invoices from when the accounting system and the bank statement disagree about the day a payment arrived?',
+    description:
+      'It decides which date a late payment is counted by, and it can be changed later for every invoice at once.',
+    required: true,
+    other: 'Another source',
+    options: [
+      {
+        value: 'ledger',
+        label: 'https://accounting.example.com/api/v2/ledgers/2026/receivables/export?format=csv',
+        description: 'The address of the export, read every night; the bank statement is ignored.',
+      },
+      { value: 'bank', label: 'B', description: 'The bank.' },
+      {
+        value: 'ask',
+        label: 'Ask the accountant each time the two disagree by more than a working day',
+      },
+    ],
+  },
+]
+
+const longAnswers = ref<QuizAnswers>({ source: 'ledger' })
+</script>
+
+<template>
+  <UiQuiz v-model="longAnswers" :questions="long" class="w-full max-w-xl" />
 </template>
 
 ```
@@ -447,7 +585,8 @@ Props:
 - `step`: `number` — The question shown, from 0 (`v-model:step`). Unset, the quiz keeps it itself and starts at the first.
 - `keys`: `QuizKeys` = `none | numbers | letters` (default `"numbers"`) — The keys the answers answer to: the digits, the letters from A, or none, which also hides the caps.
 - `action`: `((answers: QuizAnswers) => unknown)` — Sends the answers from the last question. The quiz waits for it; a rejection keeps the question and raises a toast.
-- `sendLabel`: `string` (default `""`) — The last question's button, the act itself: "Save plan" beats "Send".
+- `submitLabel`: `string` (default `""`) — The last question's button, the act itself: "Save plan" beats "Send".
+- `sendLabel`: `string` (default `""`)
 - `variant`: `"outline" | "plain"` = `outline | plain` (default `"outline"`) — `outline` is a card of its own, its top edge the progress; `plain` draws no card and no edge, for a window or a drawer that already frames it.
 Attributes are placed by the component itself: its description says where.
 

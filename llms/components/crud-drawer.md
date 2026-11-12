@@ -2,7 +2,7 @@
 
 > Edit a record beside its list and open related lists within the same panel.
 
-A component of grani-ui 0.2.0. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/crud-drawer
+A component of grani-ui 0.2.1. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/crud-drawer
 
 Also called edit panel, record drawer, side form, detail panel.
 

@@ -2,7 +2,7 @@
 
 > Check a decision before an action that cannot be undone, and show progress while the confirmed action runs.
 
-A component of grani-ui 0.2.0. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/confirm
+A component of grani-ui 0.2.1. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/confirm
 
 Also called confirmation dialog, confirm dialog, alert dialog.
 

@@ -2,7 +2,7 @@
 
 > Type a date as your language writes it, or pick it from a calendar or a preset, while the field keeps a steady width.
 
-A component of grani-ui 0.2.0. Dates, stable, since 0.1.0. Page: https://grani.arseni.work/components/date-picker
+A component of grani-ui 0.2.1. Dates, stable, since 0.1.0. Page: https://grani.arseni.work/components/date-picker
 
 Also called date input, date field, calendar input.
 

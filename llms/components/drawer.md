@@ -2,7 +2,7 @@
 
 > Read or edit details in a side panel without leaving the list or page behind it.
 
-A component of grani-ui 0.2.0. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/drawer
+A component of grani-ui 0.2.1. Overlays, stable, since 0.1.0. Page: https://grani.arseni.work/components/drawer
 
 Also called side panel, sheet, off-canvas panel, slide-over.
 

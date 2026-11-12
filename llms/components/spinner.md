@@ -2,7 +2,7 @@
 
 > Show that work is in progress where the surrounding component has no loading state of its own.
 
-A component of grani-ui 0.2.0. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/spinner
+A component of grani-ui 0.2.1. Status, stable, since 0.1.0. Page: https://grani.arseni.work/components/spinner
 
 Also called loader, loading indicator, activity indicator.
 

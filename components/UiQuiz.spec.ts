@@ -133,7 +133,8 @@ describe('UiQuiz', () => {
     expect(answers.value).toEqual({ use: 'orders' })
     expect(step.value).toBe(0)
     expect(document.activeElement).toBe(marks()[1]!.element)
-    key('Numpad3')
+    // As a browser sends it with NumLock on: the code of the key and the digit it types.
+    key('Numpad3', { key: '3' })
     await w.vm.$nextTick()
     expect(answers.value).toEqual({ use: 'requests' })
     const several = host({ step: 1 })
@@ -190,19 +191,35 @@ describe('UiQuiz', () => {
     void key
   })
 
-  it("an answer of one's own is its text, trimmed; a tile chosen after keeps the text, and the focus back takes it again", async () => {
-    const { w, answers, field, marks } = host()
+  it("an answer of one's own is its text, trimmed; a tile chosen after keeps the text, and the way through the field by Tab changes nothing", async () => {
+    const { answers, field, marks } = host()
     expect(field().attributes('aria-label')).toBe('Another answer')
     await field().setValue('  Contracts ')
     expect(answers.value).toEqual({ use: 'Contracts' })
     await marks()[1]!.setValue(true)
     expect(answers.value).toEqual({ use: 'orders' })
     expect(field().element.value).toBe('  Contracts ')
+    // On the way to Next the focus passes through the field: the tile stays the answer.
     await field().trigger('focus')
+    expect(answers.value).toEqual({ use: 'orders' })
+  })
+
+  it('the text left in the field is the answer again on a press in the field, on its key, and on typing', async () => {
+    const { w, answers, field, marks, key } = host()
+    await field().setValue('Contracts')
+    await marks()[1]!.setValue(true)
+    await field().trigger('pointerdown')
     expect(answers.value).toEqual({ use: 'Contracts' })
+    await marks()[1]!.setValue(true)
+    marks()[1]!.element.focus()
+    key('Digit4')
+    await w.vm.$nextTick()
+    expect(answers.value).toEqual({ use: 'Contracts' })
+    await marks()[1]!.setValue(true)
+    await field().setValue('Contracts and leases')
+    expect(answers.value).toEqual({ use: 'Contracts and leases' })
     await field().setValue('')
     expect(answers.value).toEqual({ use: null })
-    void w
   })
 
   it("in a question of several an answer of one's own stands beside the tiles", async () => {
@@ -308,7 +325,7 @@ describe('UiQuiz', () => {
     await next()
     await next()
     expect(action).toHaveBeenCalledTimes(1)
-    expect(action).toHaveBeenCalledWith({ use: 'orders', day: 'monday' })
+    expect(action).toHaveBeenCalledWith({ use: 'orders', digest: [], day: 'monday' })
     expect(w.find('form').attributes('aria-busy')).toBe('true')
     expect(w.find('button[type=submit]').attributes('aria-busy')).toBe('true')
     expect(marks().every((m) => m.element.disabled)).toBe(true)
@@ -318,7 +335,7 @@ describe('UiQuiz', () => {
     expect(submitted).not.toHaveBeenCalled()
     release()
     await flushPromises()
-    expect(submitted).toHaveBeenCalledWith({ use: 'orders', day: 'monday' })
+    expect(submitted).toHaveBeenCalledWith({ use: 'orders', digest: [], day: 'monday' })
     expect(w.find('[data-done]').text()).toBe('Thank you')
     expect(w.find('[role=radiogroup]').exists()).toBe(false)
     expect(document.activeElement).toBe(w.find('[data-done]').element.parentElement)
@@ -364,7 +381,7 @@ describe('UiQuiz', () => {
     const { w, submitted, next } = host({ answers: { use: 'orders', day: 'sunday' }, step: 2 })
     await next()
     await flushPromises()
-    expect(submitted).toHaveBeenCalledWith({ use: 'orders', day: 'sunday' })
+    expect(submitted).toHaveBeenCalledWith({ use: 'orders', digest: [], day: 'sunday' })
     expect(w.text()).toContain('When does the week start?')
   })
 
@@ -671,6 +688,166 @@ describe('UiQuiz', () => {
     expect(said).toContain('two questions named "day"')
     expect(said).toContain('"day" has two answers with the value "x"')
     warn.mockRestore()
+  })
+
+  it('a pick the app refuses puts the tiles back on the answers, a radio and a checkbox alike', async () => {
+    const refusing = (answers: QuizAnswers, step: number) =>
+      mount(UiQuiz, {
+        props: { questions: QUESTIONS, modelValue: answers, step },
+        attachTo: document.body,
+      })
+    const single = refusing({ use: 'invoices' }, 0)
+    const radios = single.findAll<HTMLInputElement>('input[type=radio]')
+    await radios[1]!.setValue(true)
+    await flushPromises()
+    expect(single.emitted('update:modelValue')).toHaveLength(1)
+    expect(radios.map((r) => r.element.checked)).toEqual([true, false, false])
+    const several = refusing({ digest: ['owners'] }, 1)
+    const boxes = several.findAll<HTMLInputElement>('input[type=checkbox]')
+    await boxes[1]!.setValue(true)
+    await boxes[0]!.setValue(false)
+    await flushPromises()
+    expect(boxes.map((b) => b.element.checked)).toEqual([true, false])
+  })
+
+  it('a form reset leaves the tiles on the answers', async () => {
+    const { w, marks } = host({ answers: { use: 'orders' } })
+    ;(w.find('form').element as HTMLFormElement).reset()
+    await new Promise((resolve) => setTimeout(resolve, 5))
+    expect(marks().map((m) => m.element.checked)).toEqual([false, true, false])
+  })
+
+  it('`#done` given after the send is shown, and taken away it gives the question back', async () => {
+    const shown = ref(false)
+    const answers = ref<QuizAnswers>({ use: 'orders', day: 'sunday' })
+    const w = mount(
+      defineComponent({
+        setup: () => () =>
+          h(
+            UiQuiz,
+            { questions: QUESTIONS, modelValue: answers.value, step: 2 },
+            shown.value ? { done: () => h('p', { 'data-done': '' }, 'Thank you') } : {},
+          ),
+      }),
+      { attachTo: document.body },
+    )
+    await w.find('form').trigger('submit')
+    await flushPromises()
+    expect(w.find('[data-done]').exists()).toBe(false)
+    shown.value = true
+    await w.vm.$nextTick()
+    expect(w.find('[data-done]').exists()).toBe(true)
+    shown.value = false
+    await w.vm.$nextTick()
+    expect(w.text()).toContain('When does the week start?')
+  })
+
+  it('a numpad key that is an arrow, with NumLock off, moves as an arrow and chooses nothing', async () => {
+    const { w, answers, marks } = host()
+    const arrow = new KeyboardEvent('keydown', {
+      code: 'Numpad2',
+      key: 'ArrowDown',
+      bubbles: true,
+      cancelable: true,
+    })
+    marks()[0]!.element.dispatchEvent(arrow)
+    await w.vm.$nextTick()
+    expect(arrow.defaultPrevented).toBe(false)
+    expect(answers.value).toEqual({})
+    marks()[0]!.element.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'Numpad2', key: '2', bubbles: true, cancelable: true }),
+    )
+    await w.vm.$nextTick()
+    expect(answers.value).toEqual({ use: 'orders' })
+  })
+
+  it('a long word in a question or an answer breaks inside its box', () => {
+    const { w } = host()
+    const breaks = (el: { classes: () => string[] }) =>
+      el.classes().includes('[overflow-wrap:anywhere]')
+    const tile = w.findAll('label')[0]!
+    expect(tile.findAll('span').filter(breaks).length).toBe(2)
+    expect(w.findAll('p').filter(breaks).length).toBe(2)
+  })
+
+  it('a send hands over an answer for every question: `null`, or an empty list, where none was given', async () => {
+    const action = vi.fn()
+    const optional: QuizQuestion[] = [
+      { name: 'a', title: 'A?', options: [{ value: 'x', label: 'X' }] },
+      { name: 'b', title: 'B?', multiple: true, options: [{ value: 'y', label: 'Y' }] },
+      { name: 'c', title: 'C?', options: [{ value: 'z', label: 'Z' }] },
+    ]
+    const { answers, submitted, next } = host({
+      questions: optional,
+      answers: { c: 'z' },
+      step: 2,
+      action,
+    })
+    await next()
+    await flushPromises()
+    expect(action).toHaveBeenCalledWith({ a: null, b: [], c: 'z' })
+    expect(submitted).toHaveBeenCalledWith({ a: null, b: [], c: 'z' })
+    // The model is the app's: the quiz writes it only where an answer changed.
+    expect(answers.value).toEqual({ c: 'z' })
+  })
+
+  it('in development it names an answer whose value is empty: it reads as no answer', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    host({
+      questions: [{ name: 'q', title: 'Q', options: [{ value: '', label: 'None of these' }] }],
+    })
+    expect(warn.mock.calls.map((c) => String(c[0])).join('\n')).toContain(
+      'an answer with an empty value',
+    )
+    warn.mockRestore()
+  })
+
+  it("`submitLabel` names the last question's button", async () => {
+    const w = mount(UiQuiz, {
+      props: { questions: [QUESTIONS[2]!], modelValue: {}, submitLabel: 'Save plan' },
+    })
+    expect(w.find('button[type=submit]').text()).toBe('Save plan')
+  })
+
+  it('`sendLabel`, its name in 0.2.0, still names the button, and development says to move', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    const w = mount(UiQuiz, {
+      props: { questions: [QUESTIONS[2]!], modelValue: {}, sendLabel: 'Save plan' },
+    })
+    expect(w.find('button[type=submit]').text()).toBe('Save plan')
+    expect(warn.mock.calls.map((c) => String(c[0])).join('\n')).toContain(
+      '`sendLabel` is `submitLabel`',
+    )
+    const both = mount(UiQuiz, {
+      props: { questions: [QUESTIONS[2]!], modelValue: {}, sendLabel: 'Old', submitLabel: 'New' },
+    })
+    expect(both.find('button[type=submit]').text()).toBe('New')
+    warn.mockRestore()
+  })
+
+  it("the caller's attributes and listeners stand on the form", async () => {
+    const onClick = vi.fn()
+    const w = mount(UiQuiz, {
+      props: { questions: QUESTIONS, modelValue: {} },
+      attrs: { 'data-testid': 'setup', class: 'max-w-xl', onClick },
+    })
+    const form = w.find('form')
+    expect(form.attributes('data-testid')).toBe('setup')
+    expect(form.classes()).toContain('max-w-xl')
+    await form.trigger('click')
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
+  it('a step the app sets moves no focus', async () => {
+    const { w, step } = host({ answers: { use: 'orders' } })
+    const outside = document.createElement('button')
+    document.body.append(outside)
+    outside.focus()
+    step.value = 1
+    await w.vm.$nextTick()
+    await w.vm.$nextTick()
+    expect(w.text()).toContain('Who gets the digest?')
+    expect(document.activeElement).toBe(outside)
   })
 
   it('caps stop at nine answers: the tenth has none and no key', () => {

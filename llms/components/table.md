@@ -2,7 +2,7 @@
 
 > Compare records in columns, sort and select rows and act on a row, with clear states for loading, empty results and errors.
 
-A component of grani-ui 0.2.0. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/table
+A component of grani-ui 0.2.1. Data, stable, since 0.1.0. Page: https://grani.arseni.work/components/table
 
 Also called simple table, grid, rows and columns.
 

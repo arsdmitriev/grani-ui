@@ -2,7 +2,7 @@
 
 > Write several lines, such as a note, address or biography, in a field that can grow with the text.
 
-A component of grani-ui 0.2.0. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/textarea
+A component of grani-ui 0.2.1. Form, stable, since 0.1.0. Page: https://grani.arseni.work/components/textarea
 
 Also called multiline input, text area.
 
